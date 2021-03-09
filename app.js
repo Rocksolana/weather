@@ -1,13 +1,14 @@
-let button = document.querySelector('.button')
-var inputValue = document.querySelector('.inputValue')
-
-
-button.addEventListener('click',function(){
-    fetch(`http://api.openweathermap.org/data/2.5/weather?q=" + inputValue + "&units=metric&APPID=5d066958a60d315387d9492393935c19 `)
-    .then(res => res.json())
-    .then(data => {
-        console.log(data);
-       let temp = document.querySelector(".temp");
+let weather = {
+    apiKey:"5d066958a60d315387d9492393935c19 ",
+    fetchWeather:function(city) {
+        fetch("http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric&APPID=" + this.apiKey
+        )
+        .then((response) => response.json())
+        .then((data) => this.displayWeather(data));
+    },
+    displayWeather : function(data){
+        let name = document.querySelector(".city");
+        let temp = document.querySelector(".temp");
         let pressure = document.querySelector(".pressure");
         let description = document.querySelector(".description");
         let humidity = document.querySelector(".humidity");
@@ -15,15 +16,21 @@ button.addEventListener('click',function(){
         let deg = document.querySelector(".deg");
         let img = document.querySelector(".icon");
    
-        temp.innerHTML = "Температура " + data.main.temp;
-        pressure.innerHTML = "Тиск " + data.main.pressure;
-        description.innerHTML = "Опис " + data.weather[0].description;
-        humidity.innerHTML = "Вологість " + data.main.humidity;
-        speed.innerHTML = "Швидість вітру " + data.wind.speed;
-        deg.innerHTML = "Напрям в градусах " + data.main.deg;
+        name.innerHTML = "Місто: " + data.name;
+        temp.innerHTML = "Температура: " + data.main.temp;
+        pressure.innerHTML = "Тиск: " + data.main.pressure;
+        description.innerHTML = "Опис: " + data.weather[0].description;
+        humidity.innerHTML = "Вологість: " + data.main.humidity;
+        speed.innerHTML = "Швидість вітру: " + data.wind.speed;
+        deg.innerHTML = "Напрям в градусах: " + data.wind.deg;
         img.setAttribute("src",`http://openweathermap.org/img/w/${data.weather[0].icon}.png`)
-   })
-     
-})
-/*Response*/
- 
+
+    },
+    search:function(){
+        this.fetchWeather(document.querySelector(".inputValue").value);
+    }
+};
+document.querySelector(".btn").addEventListener("click", function(){
+    weather.search();
+
+});

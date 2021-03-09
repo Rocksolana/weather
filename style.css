@@ -9,7 +9,7 @@ header {
     background-color: blue;
     color:white;
     text-align: center;
-    line-height: 100px;
+    line-height: 80px;
 }
 .row {
     display: flex;
@@ -21,21 +21,59 @@ header {
     flex: 0 0 50%;
     max-width: 50%;
 }
-.input {
-    margin: 100px 0;
-    text-align: center;
-   
-}
-   
-input [type="text"] {
-    text-align: center;
-    height: 50px;
+.container {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
     
 }
-.weather_info {
+.container_item {
+    background-color: rgb(55, 139, 248);
+    border:1px solid black;
+    border-radius: 5px;
+}
+
+.input {
+  display: inline;
+  text-align: center;
+  color: bisque;
+  
+   
+}
+   
+.inputValue {
+    padding-left: 10px;
+    background-color: rgba(98, 159, 238, 0.3);
+    border: 1px solid black;
+    border-radius: 10px;
+    margin:10px;
+    background-color: white;
+  
+}
+.inputValue::placeholder{
+color:black;
+}
+input:focus{
+    outline:none;
+}
+
+.btn {
+    background-color: rgba(98, 159, 238, 0.3);
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-right:10px;
+    width: 50px;
+    background-color: white;
+    
+}
+.weather {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     padding: 20px;
+    line-height: 22px;
 }
